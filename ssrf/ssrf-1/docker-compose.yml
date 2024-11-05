@@ -1,0 +1,14 @@
+services:
+  php-apache:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html    # Mounts local `src` directory into the container
+      - ./php.ini:/usr/local/etc/php/php.ini # Custom PHP configuration for development
+    networks:
+      - ssrf-net
+
+networks:
+  ssrf-net:
+    driver: bridge
