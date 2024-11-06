@@ -1,0 +1,58 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+h1 span{
+    display: block;
+}
+
+h1 .span-2{
+    color: rebeccapurple;
+}
+.container{
+    display: grid;
+    place-items: center;
+    padding: 20px;
+}
+
+.container .search{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.container input{
+    padding: 4px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.container button{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 5px;
+}
+
+div img{
+    width: 500px;
+}
+
+.post{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 20px;
+}
+.post p{
+    width: 500px;
+}
+.post button{
+    margin: 4px;
+    padding: 8px;
+    border-radius: 8px;
+}
