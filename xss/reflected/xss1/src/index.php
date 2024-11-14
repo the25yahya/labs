@@ -1,6 +1,6 @@
 <?php
 // Database connection
-$host = '192.168.1.152';
+$host = '192.168.1.137';
 $db = 'blog_xss';
 $user = 'newuser';
 $pass = 'newpassword'; // Enter your MySQL password here
