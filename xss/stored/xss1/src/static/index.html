@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>xss1</title>
+    <link rel="stylesheet" href="/static/home.css">
+</head>
+<body>
+    <nav>
+        <div>
+            <a href="/">Home</a>
+        </div>
+        <div><h1 class="title">NewsToday</h1></div>
+        <div>
+            <a href="/subscribe">Subscribe</a>
+        </div>
+    </nav>
+    <main>
+        <div>
+            <img src="https://media.architecturaldigest.com/photos/585abd711f906f61574e60ad/master/w_1920%2Cc_limit/gothic-cathedrals-06.jpg" alt="">
+            <h2>Westminster Abbey, London </h2>
+            <p>Henry III ordered the construction of this abbey in 1245, as he chose the spot for his burial. It's now the site of British coronations and many royal weddings—most recently, the marriage of Prince William and Kate Middleton, now the Duke and Duchess of Cambridge.</p>
+        </div>
+        <div id="comments-container">
+                <form id="comment-form">
+                    <label for="user">User:</label>
+                    <input type="text" id="user" name="user" required>
+                
+                    <label for="comment">Comment:</label>
+                    <textarea id="comment" name="comment" required></textarea>
+                
+                    <button type="submit">Submit Comment</button>
+                </form>
+        </div>
+    </main>
+
+    <script src="/static/index.js"></script>
+    <script>
+        document.getElementById('comment-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            console.log('adding comment');
+            
+    
+            const user = document.getElementById('user').value;
+            const comment = document.getElementById('comment').value;
+    
+            // Prepare the data as a JSON object
+            const data = {
+                user: user,
+                comment: comment
+            };
+    
+            // Send the data as a JSON object in the request body
+            fetch('/api/addComments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',  // Specify the content type as JSON
+                },
+                body: JSON.stringify(data),  // Convert the data to a JSON string
+            })
+            .then(response => response.json())
+            .then(data => {
+                window.location.reload()
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

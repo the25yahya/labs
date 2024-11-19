@@ -1,14 +1,18 @@
+version: '3.8'
+
 services:
-  php-apache:
+  nodejs-lab:
     build: .
+    container_name: nodejs-lab
     ports:
-      - "8080:80"
+      - "3000:3000"
     volumes:
-      - ./src:/var/www/html    # Mounts local `src` directory into the container
-      - ./php.ini:/usr/local/etc/php/php.ini # Custom PHP configuration for development
+      - ./src:/usr/src/app/src
+    environment:
+      - NODE_ENV=development
     networks:
-      - ssrf-net
+      - nodejs-lab-network
 
 networks:
-  ssrf-net:
+  nodejs-lab-network:
     driver: bridge

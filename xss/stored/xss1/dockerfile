@@ -1,13 +1,24 @@
-# Use PHP with Apache
-FROM php:8.1-apache
+# Use official Node.js image as base
+FROM node:18-alpine
 
-# Install SQLite and required PHP extensions
-RUN apt-get update && \
-    apt-get install -y libsqlite3-dev && \
-    docker-php-ext-install pdo_sqlite sqlite3
+# Install dependencies for building native modules
+RUN apk add --no-cache make gcc g++ python3
 
-# Copy the source files to the web root
-COPY src/ /var/www/html/
+# Set the working directory inside the container
+WORKDIR /usr/src/app
 
-# Expose port 80 for the web server
-EXPOSE 80
+# Copy package.json and package-lock.json from the src directory
+COPY ./src/package*.json ./
+
+# Install project dependencies
+RUN npm install
+RUN apk add --no-cache python3 py3-pip python3-dev build-base libffi-dev openssl-dev
+
+# Copy the entire src directory into the container
+COPY ./src ./src
+
+# Expose the port the app will run on
+EXPOSE 3000
+
+# Command to run the app
+CMD ["node", "src/app.js"]
