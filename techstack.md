@@ -14,6 +14,16 @@
 3 - node js with express - django - flask - java spring
 
 
+# databases : 
+1 - mysql
+2 - postgresql
+3 - oracle db 
+4 - redis
+5 - mongo db 
+6 - cloud 
+7 - firebase
+
+
 ## full techstacks to test and build full projects : 
 1 - LAMP stack : linux - apache - mysql - perl/php
 2 - WISA stack : windows - IIS - sql server - ASP 
