@@ -8,10 +8,6 @@
 </head>
 <body>
     <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Products</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+        <h2>ShopCart</h2>
+        <a href="/">Home</a>
     </nav>
