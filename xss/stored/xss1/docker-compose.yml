@@ -10,9 +10,33 @@ services:
       - ./src:/usr/src/app/src
     environment:
       - NODE_ENV=development
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_NAME=xss_lab
+    networks:
+      - nodejs-lab-network
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: nodejs-lab-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: nodejs_lab
+      MYSQL_USER: nodejs
+      MYSQL_PASSWORD: example
+    volumes:
+      - db_data:/var/lib/mysql
     networks:
       - nodejs-lab-network
 
 networks:
   nodejs-lab-network:
     driver: bridge
+
+volumes:
+  db_data:
