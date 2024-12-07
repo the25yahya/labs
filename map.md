@@ -14,6 +14,7 @@ Weak Session Management: Demonstrate in early ASP.NET and PHP.
 Open Redirects: Basic open redirect examples in PHP and Java.
 3. Rise of New Injection and Logic Flaws (2010s)
 Server-Side Request Forgery (SSRF): SSRF labs in Node.js, Python, and PHP.
+jwt vulnerabilities and misconfigs
 XML External Entity Injection (XXE): XXE labs in Java (Spring), PHP, and .NET.
 Insecure Deserialization: Exploits in PHP, Python, and Java for deserialization flaws.
 Cross-Origin Resource Sharing (CORS) Misconfigurations: Misconfigured CORS labs in Node.js and Django, showing unrestricted cross-origin access.
