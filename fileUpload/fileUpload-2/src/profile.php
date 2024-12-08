@@ -32,7 +32,7 @@
         </div>
         <div style="padding:20px">
             <div class="update-profile">
-                <img src="/assets/profile.png" alt="">
+                <img src="<?php echo isset($_SESSION['user_profile']) ? $_SESSION['user_profile'] : "/assets/profile.png"; ?>" alt="">
                 <div>
                     <p style="font-size:1.2rem">Profile picture</p>
                     <form action="/handlePfp" method="POST" enctype="multipart/form-data">
@@ -57,8 +57,6 @@
                     <button style="padding:3px 4px 3px 4px;background-color:black;color:white;margin-top:10px">save</button>
                 </div>
             </div>
-            <div></div>
-            <div></div>
         </div>
     </div>
 </body>
