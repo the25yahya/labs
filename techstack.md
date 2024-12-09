@@ -11,7 +11,7 @@
 ## backend : 
 1 - PHP - ASP - java servlets
 2 - ruby on rails - php laravel - django - asp.net
-3 - node js with express - django - flask - java spring
+3 - node js with express - next.js - django - flask - java spring
 
 
 # databases : 

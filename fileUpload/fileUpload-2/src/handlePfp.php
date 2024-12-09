@@ -15,6 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
     $file_type = mime_content_type($_FILES['file']['tmp_name']);
+    $file_extension = strtolower(pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION));
+
+    if (!in_array($file_extension,['jpg', 'jpeg', 'png', 'gif'])) {
+        echo json_encode(['success' => false, 'message' => 'file type not allowed']);
+        exit;
+    }
     if (!in_array($file_type,$allowed_types)) {
         echo json_encode(['success' => false, 'message' => 'file type not allowed']);
         exit;
@@ -27,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
     $_SESSION['user_profile'] = 'uploads/' . $file_name;
-    echo json_encode(["success" => true,"message" => "profile photo saved successfully"]);
+    echo json_encode(["success" => true,"message" => "profile photo saved successfully : uploads/" . $file_name ]);
     exit;
 }
 
