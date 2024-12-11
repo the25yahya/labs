@@ -6,6 +6,7 @@ File Inclusion (LFI/RFI): Exploiting file inclusions in PHP, ASP, and Perl.
 SQL Injection (SQLi): Classic SQL injection in PHP, ASP.NET, and JSP.
 Command Injection: Command manipulation in CGI (Perl) and PHP.
 Cross-Site Scripting (XSS): Start with reflective XSS in PHP, ASP, and JSP.
+file upload vulnerabilities // on research (finished study / methedology)
 2. Session Management and Authentication Issues (2000s)
 Cross-Site Request Forgery (CSRF): CSRF attacks in PHP, Ruby on Rails, and Flask, illustrating token defenses.
 Session Fixation: Example labs in PHP and ASP.NET.

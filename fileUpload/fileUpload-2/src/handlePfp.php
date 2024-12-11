@@ -7,36 +7,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $upload_dir = __DIR__ . '/uploads/';
     if (!is_dir($upload_dir)) {
-        mkdir($upload_dir,0777,true);
+        mkdir($upload_dir, 0755, true);  // More secure than 0777
     }
     if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-        echo json_encode(['success'=>false,'message'=>'failed to upload file']);
+        echo json_encode(['success' => false, 'message' => 'failed to upload file']);
         exit;
     }
-    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
-    $file_type = mime_content_type($_FILES['file']['tmp_name']);
-    $file_extension = strtolower(pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION));
 
-    if (!in_array($file_extension,['jpg', 'jpeg', 'png', 'gif'])) {
-        echo json_encode(['success' => false, 'message' => 'file type not allowed']);
-        exit;
-    }
-    if (!in_array($file_type,$allowed_types)) {
-        echo json_encode(['success' => false, 'message' => 'file type not allowed']);
-        exit;
-    }
-    $file_name = uniqid('profile_',true) . '.' . pathinfo($_FILES['file']['name'],PATHINFO_EXTENSION);
-
-    $file_path = $upload_dir . $file_name;
-    if (!move_uploaded_file($_FILES['file']['tmp_name'],$file_path)) {
+    $file_path = $upload_dir . basename($_FILES['file']['name']);
+    
+    // Move the uploaded file to the server directory
+    if (!move_uploaded_file($_FILES['file']['tmp_name'], $file_path)) {
         echo json_encode(["success" => false, "message" => "failed to save file"]);
         exit;
     }
-    $_SESSION['user_profile'] = 'uploads/' . $file_name;
-    echo json_encode(["success" => true,"message" => "profile photo saved successfully : uploads/" . $file_name ]);
+    
+    // Ensure the file exists and is valid
+    if (!file_exists($file_path) || empty($file_path)) {
+        echo json_encode(["success" => false, "message" => "file does not exist or path is invalid"]);
+        exit;
+    }
+
+    // Check if the file is an image
+    $image_size = getimagesize($file_path);
+    if ($image_size === false) {
+        echo json_encode(["success" => false, "message" => "invalid image file"]);
+        exit;
+    }
+
+    // Proceed with EXIF data if valid image
+    $exif = exif_read_data($file_path);
+    if ($exif) {
+        echo '<pre>';
+        print_r($exif);
+        echo '</pre>';
+    } else {
+        echo "No EXIF data found in the image.";
+    }
+
+    $_SESSION['user_profile'] = 'uploads/' . basename($file_path);
+    echo json_encode(["success" => true, "message" => "profile photo saved successfully"]);
     exit;
 }
 
-echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 
 ?>
