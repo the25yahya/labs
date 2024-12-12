@@ -1,1 +1,0 @@
-# bugs discovered in technologies with known poc 
