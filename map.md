@@ -13,6 +13,7 @@ Session Fixation: Example labs in PHP and ASP.NET.
 Insecure Direct Object Reference (IDOR): Labs in PHP and JSP.
 Weak Session Management: Demonstrate in early ASP.NET and PHP.
 Open Redirects: Basic open redirect examples in PHP and Java.
+http request smuggling
 3. Rise of New Injection and Logic Flaws (2010s)
 Server-Side Request Forgery (SSRF): SSRF labs in Node.js, Python, and PHP.
 jwt vulnerabilities and misconfigs
